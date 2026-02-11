@@ -1,6 +1,6 @@
 ShokherSrity Proprietary License Agreement
 
-Copyright (c) 2025 ShokherSrity
+Copyright (c) 2025-<CURRENT_YEAR> ShokherSrity
 All Rights Reserved
 
 This Software, including without limitation the website source code, design, graphics, and any associated photographs (collectively, the “Software”), is licensed, not sold, to you by ShokherSrity under the following terms and conditions.

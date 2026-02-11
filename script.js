@@ -1,4 +1,18 @@
+// Dynamic Copyright Year Updater
+function updateCopyrightYear() {
+    const currentYear = new Date().getFullYear();
+    const copyrightElements = document.querySelectorAll('.copyright-year');
+    
+    copyrightElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+}
+
+// Initialize AOS animation library with enhanced settings and mobile optimization
 document.addEventListener('DOMContentLoaded', function() {
+    // Update copyright year
+    updateCopyrightYear();
+    
     // Initialize AOS animation library with enhanced settings and mobile optimization
     AOS.init({
         duration: 800, // Slightly faster animations
@@ -59,6 +73,58 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             pageContent.classList.add('visible');
         }, 100);
+    }
+
+    // Premium scroll effects
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition < window.innerHeight) {
+                heroSection.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            }
+        });
+    }
+
+    // Add premium hover effects to buttons
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+        });
+
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+    });
+
+    // Add statistics counter animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.textContent.replace('+', ''));
+                    let current = 0;
+                    const increment = target / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            entry.target.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            entry.target.textContent = Math.floor(current) + '+';
+                        }
+                    }, 30);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => observer.observe(stat));
     }
 
     // Intersection Observer for fade-in animations
