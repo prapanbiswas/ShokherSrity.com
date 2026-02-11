@@ -6,7 +6,7 @@
     <title>ShokherSrity Photography</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="icon" href="attached_assets/logo.webp" type="image/webp">
@@ -24,7 +24,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="packages.html">Packages</a></li>
-                <li><a href="download.html">App</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -32,46 +31,118 @@
 
     <main>
         <section class="hero">
+            <div class="hero-overlay"></div>
             <div class="hero-content" data-aos="fade-up">
-                <h1>Capture Your Best Moments</h1>
-                <a href="gallery.html" class="cta-button">View Our Work</a>
+                <h1 class="hero-title">Capture Your Best Moments</h1>
+                <p class="hero-subtitle">Premium Wedding Photography in Bangladesh</p>
+                <div class="hero-cta">
+                    <a href="gallery.html" class="cta-button primary">View Our Work</a>
+                    <a href="packages.html" class="cta-button secondary">Our Packages</a>
+                </div>
             </div>
+            <div class="hero-decorative"></div>
         </section>
         <section class="about" data-aos="fade-up">
-            <div class="about-content">
-                <h2>About Us</h2>
-                <p>At ShokherSrity, we are dedicated to the art of wedding photography. We specialize in capturing the beautiful moments of your special day as you exchange vows and celebrate your love. Our passion lies in documenting these precious memories that you'll cherish forever.</p>
-                <p>Our professional team, led by Kowsik Saha and Dip Pal, combines technical expertise with artistic vision to create stunning images that tell your unique love story. From candid emotions to perfectly posed portraits, we capture every detail of your wedding celebration.</p>
-                <p>We pride ourselves on our ability to work seamlessly with couples, their families, and other vendors, ensuring a smooth experience while delivering beautiful, emotional photographs that will be treasured for generations.</p>
+            <div class="about-container">
+                <div class="about-image" data-aos="fade-right">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">About Us</h2>
+                    <p class="about-text">At ShokherSrity, we are dedicated to the art of wedding photography. We specialize in capturing the beautiful moments of your special day as you exchange vows and celebrate your love. Our passion lies in documenting these precious memories that you'll cherish forever.</p>
+                    <p class="about-text">Our professional team, led by Kowsik Saha and Dip Pal, combines technical expertise with artistic vision to create stunning images that tell your unique love story. From candid emotions to perfectly posed portraits, we capture every detail of your wedding celebration.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Weddings Captured</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Moments Preserved</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <section class="app-promo" data-aos="fade-up">
-            <div class="app-promo-content">
-                <h2>Get Our Mobile App</h2>
-                <p>Take ShokherSrity with you everywhere! Download our app for a better photography experience.</p>
-                <a href="download.html" class="cta-button">Download Now</a>
+        
+        <section class="featured-work">
+            <div class="section-header">
+                <h2 class="section-title">Featured Work</h2>
+                <a href="gallery.html" class="view-all">View All Gallery</a>
+            </div>
+            <div class="featured-grid">
+                <div class="featured-item" data-aos="fade-up">
+                    <div class="featured-image placeholder-1"></div>
+                    <div class="featured-caption">Ceremony Moments</div>
+                </div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="featured-image placeholder-2"></div>
+                    <div class="featured-caption">Portrait Perfection</div>
+                </div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="featured-image placeholder-3"></div>
+                    <div class="featured-caption">Reception Celebration</div>
+                </div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="featured-image placeholder-4"></div>
+                    <div class="featured-caption">Candid Emotions</div>
+                </div>
             </div>
         </section>
+        
     </main>
 
-    <footer>
+    <footer class="premium-footer">
+        <div class="footer-wave"></div>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: shokhersrity@gmail.com</p>
-                <p>Kowsik Saha: +880 1799334656</p>
-                <p>Dip Pal: +880 1700504456</p>
+                <h3 class="footer-title">Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>shokhersrity@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>Kowsik Saha: +880 1799334656</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>Dip Pal: +880 1700504456</span>
+                    </div>
+                </div>
             </div>
             <div class="footer-section">
-                <h3>Follow Us</h3>
+                <h3 class="footer-title">Follow Us</h3>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/shokhersrity?igsh=YzRwbmVieHppeW14" target="_blank">Instagram</a>
-                    <a href="https://www.facebook.com/shokhersrity" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/shokhersrity?igsh=YzRwbmVieHppeW14" target="_blank" class="social-link">
+                        <span class="social-icon">📷</span> Instagram
+                    </a>
+                    <a href="https://www.facebook.com/shokhersrity" target="_blank" class="social-link">
+                        <span class="social-icon">📘</span> Facebook
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <div class="quick-links">
+                    <a href="index.html">Home</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="packages.html">Packages</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; ShokherSrity. All rights reserved.</p>
+            <p>&copy; <span class="copyright-year"></span> ShokherSrity. All rights reserved.</p>
+            <div class="footer-credits">
+                <span>Premium Wedding Photography</span>
+                <span>Based in Bangladesh</span>
+            </div>
         </div>
     </footer>
 
