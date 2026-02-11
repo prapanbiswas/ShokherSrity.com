@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShokherSrity Photography</title>
+    <meta name="description" content="ShokherSrity - Premium Wedding Photography in Bangladesh. Capturing your precious moments with artistry and elegance.">
+    <meta name="keywords" content="wedding photography, Bangladesh, professional photographer, wedding photos, ShokherSrity">
+    <title>ShokherSrity | Premium Wedding Photography</title>
+    
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <!-- Favicon -->
     <link rel="icon" href="attached_assets/logo.webp" type="image/webp">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">ShokherSrity</div>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo">ShokherSrity</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -30,122 +41,283 @@
     </header>
 
     <main>
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero" data-aos="fade">
             <div class="hero-overlay"></div>
-            <div class="hero-content" data-aos="fade-up">
-                <h1 class="hero-title">Capture Your Best Moments</h1>
-                <p class="hero-subtitle">Premium Wedding Photography in Bangladesh</p>
+            <div class="hero-content">
+                <p class="hero-subtitle">Est. 2019</p>
+                <h1 class="hero-title">
+                    Capturing Love
+                    <span>That Lasts Forever</span>
+                </h1>
+                <p class="hero-description">
+                    Premium wedding photography that transforms your special moments into timeless works of art. Based in Bangladesh, available worldwide.
+                </p>
                 <div class="hero-cta">
-                    <a href="gallery.html" class="cta-button primary">View Our Work</a>
-                    <a href="packages.html" class="cta-button secondary">Our Packages</a>
+                    <a href="gallery.html" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <path d="M21 15l-5-5L5 21"></path>
+                        </svg>
+                        View Gallery
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+                        </svg>
+                        Get in Touch
+                    </a>
                 </div>
             </div>
-            <div class="hero-decorative"></div>
+            <div class="hero-decorative">
+                <div class="scroll-indicator"></div>
+                <span class="scroll-text">Scroll</span>
+            </div>
         </section>
+
+        <!-- About Section -->
         <section class="about" data-aos="fade-up">
             <div class="about-container">
-                <div class="about-image" data-aos="fade-right">
-                    <div class="image-placeholder"></div>
+                <div class="about-image-wrapper" data-aos="fade-right">
+                    <div class="about-image-frame"></div>
+                    <div class="about-image">
+                        <img src="attached_assets/1.webp" alt="Wedding Photography - ShokherSrity" loading="lazy">
+                    </div>
                 </div>
-                <div class="about-content">
-                    <h2 class="section-title">About Us</h2>
-                    <p class="about-text">At ShokherSrity, we are dedicated to the art of wedding photography. We specialize in capturing the beautiful moments of your special day as you exchange vows and celebrate your love. Our passion lies in documenting these precious memories that you'll cherish forever.</p>
-                    <p class="about-text">Our professional team, led by Kowsik Saha and Dip Pal, combines technical expertise with artistic vision to create stunning images that tell your unique love story. From candid emotions to perfectly posed portraits, we capture every detail of your wedding celebration.</p>
+                <div class="about-content" data-aos="fade-left">
+                    <span class="section-label">About Us</span>
+                    <h2 class="section-title">Where Every Moment <span class="text-gradient">Becomes Art</span></h2>
+                    <p>
+                        At ShokherSrity, we believe that wedding photography is more than just capturing images - it's about preserving emotions, telling stories, and creating heirlooms that will be treasured for generations.
+                    </p>
+                    <p>
+                        Led by the talented duo Kowsik Saha and Dip Pal, our team brings together technical excellence and artistic vision. With over 5 years of experience and 100+ weddings captured, we understand the nuances of Bangladeshi wedding traditions while adding a contemporary, cinematic touch.
+                    </p>
+                    <p class="about-signature">
+                        "Capturing the essence of love, one frame at a time."
+                    </p>
                     <div class="about-stats">
                         <div class="stat-item">
-                            <span class="stat-number">5+</span>
+                            <span class="stat-number" data-count="5" data-suffix="+">5+</span>
                             <span class="stat-label">Years Experience</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">100+</span>
-                            <span class="stat-label">Weddings Captured</span>
+                            <span class="stat-number" data-count="100" data-suffix="+">100+</span>
+                            <span class="stat-label">Weddings</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">5000+</span>
-                            <span class="stat-label">Moments Preserved</span>
+                            <span class="stat-number" data-count="5000" data-suffix="+">5000+</span>
+                            <span class="stat-label">Moments Captured</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section class="featured-work">
+
+        <!-- Featured Work Section -->
+        <section class="featured-work" data-aos="fade-up">
             <div class="section-header">
-                <h2 class="section-title">Featured Work</h2>
-                <a href="gallery.html" class="view-all">View All Gallery</a>
+                <span class="section-label">Portfolio</span>
+                <h2 class="section-title">Featured <span class="text-gradient">Work</span></h2>
+                <p class="section-subtitle">A glimpse into the magical moments we've had the privilege to capture</p>
             </div>
-            <div class="featured-grid">
-                <div class="featured-item" data-aos="fade-up">
-                    <div class="featured-image placeholder-1"></div>
-                    <div class="featured-caption">Ceremony Moments</div>
+            <div class="featured-grid stagger-children">
+                <div class="featured-item" data-aos="fade-up" data-category="ceremony">
+                    <img src="attached_assets/2.webp" alt="Wedding Ceremony" loading="lazy">
+                    <div class="featured-overlay">
+                        <span class="featured-category">Ceremony</span>
+                        <h4 class="featured-title">Sacred Vows</h4>
+                    </div>
                 </div>
-                <div class="featured-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="featured-image placeholder-2"></div>
-                    <div class="featured-caption">Portrait Perfection</div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="100" data-category="portraits">
+                    <img src="attached_assets/3.webp" alt="Wedding Portraits" loading="lazy">
+                    <div class="featured-overlay">
+                        <span class="featured-category">Portraits</span>
+                        <h4 class="featured-title">Eternal Love</h4>
+                    </div>
                 </div>
-                <div class="featured-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="featured-image placeholder-3"></div>
-                    <div class="featured-caption">Reception Celebration</div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="200" data-category="reception">
+                    <img src="attached_assets/4.webp" alt="Wedding Reception" loading="lazy">
+                    <div class="featured-overlay">
+                        <span class="featured-category">Reception</span>
+                        <h4 class="featured-title">Joyful Celebration</h4>
+                    </div>
                 </div>
-                <div class="featured-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="featured-image placeholder-4"></div>
-                    <div class="featured-caption">Candid Emotions</div>
+                <div class="featured-item" data-aos="fade-up" data-aos-delay="300" data-category="details">
+                    <img src="attached_assets/5.webp" alt="Wedding Details" loading="lazy">
+                    <div class="featured-overlay">
+                        <span class="featured-category">Details</span>
+                        <h4 class="featured-title">Precious Moments</h4>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="gallery.html" class="btn btn-outline">
+                    View Full Gallery
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" data-aos="fade-up">
+            <div class="section-header">
+                <span class="section-label" style="color: var(--color-gold);">Testimonials</span>
+                <h2 class="section-title">What Couples <span class="text-gradient">Say</span></h2>
+            </div>
+            <div class="testimonials-grid stagger-children">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "ShokherSrity captured our wedding day so beautifully that every time we look at the photos, we relive those magical moments. The attention to detail and the artistic vision exceeded all our expectations."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SR</div>
+                        <div>
+                            <div class="testimonial-name">Sarah & Rahul</div>
+                            <div class="testimonial-role">Dhaka, 2023</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "From the pre-wedding shoot to the main event, Kowsik and Dip were incredibly professional and creative. They made us feel comfortable and captured our personalities perfectly."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">NA</div>
+                        <div>
+                            <div class="testimonial-name">Nadia & Asif</div>
+                            <div class="testimonial-role">Chittagong, 2023</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "The video and photo quality was outstanding! They captured candid moments we didn't even know happened. ShokherSrity truly are artists behind the camera. Highly recommended!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">FA</div>
+                        <div>
+                            <div class="testimonial-name">Farah & Adil</div>
+                            <div class="testimonial-role">Sylhet, 2024</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
+
+        <!-- CTA Section -->
+        <section class="cta-section" data-aos="fade-up">
+            <div class="cta-content">
+                <h2>Ready to Capture Your <span class="text-gradient">Special Day?</span></h2>
+                <p>Let's create something beautiful together. Book a consultation to discuss your vision and let us bring it to life.</p>
+                <a href="contact.html" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Book a Consultation
+                </a>
+            </div>
+        </section>
     </main>
 
-    <footer class="premium-footer">
-        <div class="footer-wave"></div>
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3 class="footer-title">Contact Us</h3>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        <span>shokhersrity@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <span>Kowsik Saha: +880 1799334656</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <span>Dip Pal: +880 1700504456</span>
-                    </div>
-                </div>
+            <div class="footer-brand">
+                <a href="index.html" class="logo">ShokherSrity</a>
+                <p>Premium wedding photography services in Bangladesh. Capturing your love story with elegance, artistry, and passion.</p>
             </div>
             <div class="footer-section">
-                <h3 class="footer-title">Follow Us</h3>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/shokhersrity?igsh=YzRwbmVieHppeW14" target="_blank" class="social-link">
-                        <span class="social-icon">📷</span> Instagram
-                    </a>
-                    <a href="https://www.facebook.com/shokhersrity" target="_blank" class="social-link">
-                        <span class="social-icon">📘</span> Facebook
-                    </a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-title">Quick Links</h3>
-                <div class="quick-links">
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="footer-links">
                     <a href="index.html">Home</a>
                     <a href="gallery.html">Gallery</a>
                     <a href="packages.html">Packages</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
+            <div class="footer-section">
+                <h4 class="footer-title">Services</h4>
+                <div class="footer-links">
+                    <a href="packages.html">Wedding Photography</a>
+                    <a href="packages.html">Cinematography</a>
+                    <a href="packages.html">Portrait Sessions</a>
+                    <a href="packages.html">Event Coverage</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:shokhersrity@gmail.com">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        shokhersrity@gmail.com
+                    </a>
+                    <a href="tel:+8801799334656">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+                        </svg>
+                        +880 1799-334656
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span class="copyright-year"></span> ShokherSrity. All rights reserved.</p>
-            <div class="footer-credits">
-                <span>Premium Wedding Photography</span>
-                <span>Based in Bangladesh</span>
+            <p class="footer-copyright">
+                &copy; <span data-copyright-year>2024</span> ShokherSrity. All rights reserved.
+            </p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/shokhersrity" target="_blank" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/shokhersrity" target="_blank" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://wa.me/8801799334656" target="_blank" aria-label="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
