@@ -3,83 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - ShokherSrity</title>
+    <meta name="description" content="View our exquisite wedding photography portfolio. Moments of love, joy, and celebration captured by ShokherSrity.">
+    <title>Gallery | ShokherSrity Wedding Photography</title>
     
-    <!-- Performance optimization headers -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-    <meta http-equiv="Cache-Control" content="max-age=86400">
-    
-    <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="attached_assets/logo.webp">
-    
-    <!-- Resource hints for faster loading -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com">
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="attached_assets/logo.webp" as="image" type="image/webp">
-    <link rel="preload" href="attached_assets/1.webp" as="image" type="image/webp" fetchpriority="high">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- DNS prefetch -->
-    <link rel="dns-prefetch" href="https://www.facebook.com">
-    <link rel="dns-prefetch" href="https://www.instagram.com">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     
-    <!-- Meta tags for SEO and performance -->
-    <meta name="description" content="ShokherSrity Photography Gallery - View our wedding photography portfolio">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Stylesheet loading optimization -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Favicon -->
     <link rel="icon" href="attached_assets/logo.webp" type="image/webp">
-    
-    <!-- Inline critical CSS for faster rendering -->
-    <style>
-        /* Critical CSS for above-the-fold content */
-        body {margin:0;padding:0;font-family:'Montserrat',sans-serif}
-        header {position:fixed;width:100%;z-index:1000;backdrop-filter:blur(10px);background:rgba(0,0,0,.85)}
-        .logo {color:transparent;background:linear-gradient(45deg,#ffd700,#ffed4a);-webkit-background-clip:text;background-clip:text}
-        nav ul {display:flex;list-style:none;justify-content:center;flex-wrap:wrap;gap:1.5rem}
-        nav ul li a {color:white;text-decoration:none;padding:.5rem 1rem;font-weight:600}
-        
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
-    
-    <!-- Preload AOS script -->
-    <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
 </head>
 <body>
-    <script>
-        // Remove any existing service workers (disable offline mode)
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister();
-                    console.log('Service Worker unregistered');
-                }
-            });
-        }
-    </script>
-    
+    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">ShokherSrity</div>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo">ShokherSrity</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -93,369 +39,430 @@
         </nav>
     </header>
 
-    <main class="gallery-main">
-        <h1>Our Portfolio</h1>
-        <div class="gallery-grid">
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/1.webp" alt="Wedding Photo 1" loading="lazy" width="800" height="600" fetchpriority="high">
-                <div class="image-caption">Wedding Moment</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/2.webp" alt="Wedding Photo 2" loading="lazy" width="800" height="600">
-                <div class="image-caption">Celebration of Love</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/3.webp" alt="Wedding Photo 3" loading="lazy" width="800" height="600">
-                <div class="image-caption">Perfect Couple</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/4.webp" alt="Wedding Photo 4" loading="lazy" width="800" height="600">
-                <div class="image-caption">Special Moments</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/5.webp" alt="Wedding Photo 5" loading="lazy" width="800" height="600">
-                <div class="image-caption">Forever Together</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/6.webp" alt="Wedding Photo 6" loading="lazy" width="800" height="600">
-                <div class="image-caption">Beautiful Bride</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/7.webp" alt="Wedding Photo 7" loading="lazy" width="800" height="600">
-                <div class="image-caption">Wedding Ceremony</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/8.webp" alt="Wedding Photo 8" loading="lazy" width="800" height="600">
-                <div class="image-caption">Romantic Moment</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/9.webp" alt="Wedding Photo 9" loading="lazy" width="800" height="600">
-                <div class="image-caption">Family Celebration</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/10.webp" alt="Wedding Photo 10" loading="lazy" width="800" height="600">
-                <div class="image-caption">Traditional Ceremony</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/11.webp" alt="Wedding Photo 11" loading="lazy" width="800" height="600">
-                <div class="image-caption">Joyful Dance</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/12.webp" alt="Wedding Photo 12" loading="lazy" width="800" height="600">
-                <div class="image-caption">Wedding Portraits</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/13.webp" alt="Wedding Photo 13" loading="lazy" width="800" height="600">
-                <div class="image-caption">Moments of Joy</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/14.webp" alt="Wedding Photo 14" loading="lazy" width="800" height="600">
-                <div class="image-caption">Wedding Details</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/15.webp" alt="Wedding Photo 15" loading="lazy" width="800" height="600">
-                <div class="image-caption">First Dance</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/16.webp" alt="Wedding Photo 16" loading="lazy" width="800" height="600">
-                <div class="image-caption">Wedding Bliss</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/17.webp" alt="Wedding Photo 17" loading="lazy" width="800" height="600">
-                <div class="image-caption">Couple Portrait</div>
-            </div>
-            <div class="gallery-item portrait" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/18.webp" alt="Wedding Photo 18" loading="lazy" width="800" height="600">
-                <div class="image-caption">Magical Evening</div>
-            </div>
-            <div class="gallery-item landscape" data-aos="fade-up">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' %3E%3C/svg%3E" data-src="attached_assets/19.webp" alt="Wedding Photo 19" loading="lazy" width="800" height="600">
-                <div class="image-caption">Reception Highlights</div>
-            </div>
+    <main class="gallery-page">
+        <!-- Gallery Header -->
+        <div class="gallery-header" data-aos="fade-down">
+            <span class="section-label" style="color: var(--color-gold);">Portfolio</span>
+            <h1>Our <span class="text-gradient">Gallery</span></h1>
+            <p>Explore our collection of wedding stories, each frame a testament to love, joy, and celebration</p>
         </div>
-        <div class="view-more-container">
-            <a href="https://www.facebook.com/shokhersrity" target="_blank" class="view-more-button">View More</a>
+
+        <!-- Filter Buttons -->
+        <div class="gallery-filters" data-aos="fade-up">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ceremony">Ceremony</button>
+            <button class="filter-btn" data-filter="portraits">Portraits</button>
+            <button class="filter-btn" data-filter="reception">Reception</button>
+            <button class="filter-btn" data-filter="details">Details</button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-grid" data-aos="fade-up">
+            <!-- Large Featured Item -->
+            <div class="masonry-item" data-category="ceremony" data-aos="fade-up">
+                <img src="attached_assets/1.webp" alt="Wedding Ceremony Moment" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Ceremony</span>
+                    <h4 class="masonry-title">Sacred Beginnings</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="portraits" data-aos="fade-up" data-aos-delay="50">
+                <img src="attached_assets/2.webp" alt="Bride Portrait" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Portraits</span>
+                    <h4 class="masonry-title">Radiant Beauty</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="reception" data-aos="fade-up" data-aos-delay="100">
+                <img src="attached_assets/3.webp" alt="Wedding Reception" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Reception</span>
+                    <h4 class="masonry-title">Evening Celebration</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="details" data-aos="fade-up" data-aos-delay="150">
+                <img src="attached_assets/4.webp" alt="Wedding Details" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Details</span>
+                    <h4 class="masonry-title">Finishing Touches</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="ceremony" data-aos="fade-up" data-aos-delay="200">
+                <img src="attached_assets/5.webp" alt="Wedding Ritual" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Ceremony</span>
+                    <h4 class="masonry-title">Blessed Union</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="portraits" data-aos="fade-up" data-aos-delay="250">
+                <img src="attached_assets/6.webp" alt="Couple Portrait" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Portraits</span>
+                    <h4 class="masonry-title">Together Forever</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="reception" data-aos="fade-up" data-aos-delay="300">
+                <img src="attached_assets/7.webp" alt="Wedding Dance" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Reception</span>
+                    <h4 class="masonry-title">First Dance</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="details" data-aos="fade-up" data-aos-delay="350">
+                <img src="attached_assets/8.webp" alt="Wedding Rings" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Details</span>
+                    <h4 class="masonry-title">Symbol of Love</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="ceremony" data-aos="fade-up" data-aos-delay="400">
+                <img src="attached_assets/9.webp" alt="Traditional Ceremony" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Ceremony</span>
+                    <h4 class="masonry-title">Sacred Traditions</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="portraits" data-aos="fade-up" data-aos-delay="450">
+                <img src="attached_assets/10.webp" alt="Groom Portrait" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Portraits</span>
+                    <h4 class="masonry-title">Dashing Groom</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="reception" data-aos="fade-up" data-aos-delay="500">
+                <img src="attached_assets/11.webp" alt="Wedding Party" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Reception</span>
+                    <h4 class="masonry-title">Joyful Gathering</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="details" data-aos="fade-up" data-aos-delay="550">
+                <img src="attached_assets/12.webp" alt="Wedding Decor" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Details</span>
+                    <h4 class="masonry-title">Elegant Decor</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="ceremony" data-aos="fade-up" data-aos-delay="600">
+                <img src="attached_assets/13.webp" alt="Wedding Vows" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Ceremony</span>
+                    <h4 class="masonry-title">Promises Made</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="portraits" data-aos="fade-up" data-aos-delay="650">
+                <img src="attached_assets/14.webp" alt="Couple Embrace" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Portraits</span>
+                    <h4 class="masonry-title">Intimate Moment</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="reception" data-aos="fade-up" data-aos-delay="700">
+                <img src="attached_assets/15.webp" alt="Wedding Cake" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Reception</span>
+                    <h4 class="masonry-title">Sweet Moments</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="details" data-aos="fade-up" data-aos-delay="750">
+                <img src="attached_assets/16.webp" alt="Bridal Bouquet" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Details</span>
+                    <h4 class="masonry-title">Blooming Love</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="ceremony" data-aos="fade-up" data-aos-delay="800">
+                <img src="attached_assets/17.webp" alt="Wedding Blessing" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Ceremony</span>
+                    <h4 class="masonry-title">Family Blessings</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="portraits" data-aos="fade-up" data-aos-delay="850">
+                <img src="attached_assets/18.webp" alt="Romantic Portrait" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Portraits</span>
+                    <h4 class="masonry-title">Golden Hour Love</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="masonry-item" data-category="reception" data-aos="fade-up" data-aos-delay="900">
+                <img src="attached_assets/19.webp" alt="Celebration" loading="lazy">
+                <div class="masonry-overlay">
+                    <span class="masonry-category">Reception</span>
+                    <h4 class="masonry-title">Grand Finale</h4>
+                </div>
+                <div class="masonry-zoom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: shokhersrity@gmail.com</p>
-                <p>Kowsik Saha: +880 1799334656</p>
-                <p>Dip Pal: +880 1700504456</p>
+            <div class="footer-brand">
+                <a href="index.html" class="logo">ShokherSrity</a>
+                <p>Premium wedding photography services in Bangladesh. Capturing your love story with elegance, artistry, and passion.</p>
             </div>
             <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/shokhersrity?igsh=YzRwbmVieHppeW14" target="_blank">Instagram</a>
-                    <a href="https://www.facebook.com/shokhersrity" target="_blank">Facebook</a>
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="packages.html">Packages</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-title">Services</h4>
+                <div class="footer-links">
+                    <a href="packages.html">Wedding Photography</a>
+                    <a href="packages.html">Cinematography</a>
+                    <a href="packages.html">Portrait Sessions</a>
+                    <a href="packages.html">Event Coverage</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:shokhersrity@gmail.com">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        shokhersrity@gmail.com
+                    </a>
+                    <a href="tel:+8801799334656">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+                        </svg>
+                        +880 1799-334656
+                    </a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span class="copyright-year"></span> ShokherSrity. All rights reserved.</p>
+            <p class="footer-copyright">
+                &copy; <span data-copyright-year>2024</span> ShokherSrity. All rights reserved.
+            </p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/shokhersrity" target="_blank" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/shokhersrity" target="_blank" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://wa.me/8801799334656" target="_blank" aria-label="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
-    
     <!-- Lightbox -->
     <div class="lightbox">
         <div class="lightbox-content">
             <img src="" alt="" class="lightbox-img">
             <div class="lightbox-caption"></div>
         </div>
-        <div class="lightbox-close">&times;</div>
+        <div class="lightbox-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>
         <div class="lightbox-nav">
-            <div class="lightbox-prev">&#10094;</div>
-            <div class="lightbox-next">&#10095;</div>
+            <div class="lightbox-prev">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <div class="lightbox-next">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </div>
         </div>
     </div>
 
-    <script>        
-        // Defer non-critical JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            // Performance optimization: Use requestIdleCallback for non-critical tasks
-            const initGallery = () => {
-                // Load AOS with optimized settings
-                AOS.init({
-                    duration: 800,
-                    easing: 'ease-out',
-                    once: true, // Changed to true for better performance
-                    offset: 100,
-                    delay: 100,
-                    disable: 'mobile' // Disable on mobile for better performance
-                });
-                
-                // Image optimization
-                optimizeImages();
-                
-                // Initialize lightbox
-                initLightbox();
-            };
-            
-            // Use requestIdleCallback if available, fall back to setTimeout
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(initGallery, { timeout: 2000 });
-            } else {
-                setTimeout(initGallery, 200);
-            }
-            
-            // Image optimization function
-            function optimizeImages() {
-                const images = document.querySelectorAll('.gallery-item img');
-                
-                // Create IntersectionObserver for efficient lazy loading
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            
-                            // Load image
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                            }
-                            
-                            // Add loaded class for animation
-                            img.classList.add('loaded');
-                            
-                            // Stop observing once loaded
-                            observer.unobserve(img);
-                            
-                            // Log performance metrics
-                            if (window.performance) {
-                                const perfData = window.performance.getEntriesByName(img.src);
-                                if (perfData.length) {
-                                    console.log(`Image loaded: ${img.alt} - ${Math.round(perfData[0].duration)}ms`);
-                                }
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '100px 0px', // Increased rootMargin for earlier loading
-                    threshold: 0.1
-                });
-                
-                // Optimize image loading order
-                // First load images in the current viewport
-                images.forEach(img => {
-                    // Check if in viewport
-                    const rect = img.getBoundingClientRect();
-                    const isInViewport = (
-                        rect.top >= 0 &&
-                        rect.left >= 0 &&
-                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                    );
-                    
-                    if (isInViewport) {
-                        // Set high priority for viewport images
-                        img.fetchPriority = 'high';
-                    }
-                    
-                    // Start observing
-                    imageObserver.observe(img);
-                });
-            }
-            
-            // Lightbox functionality - optimized version
-            function initLightbox() {
-                const lightbox = document.querySelector('.lightbox');
-                const lightboxImg = document.querySelector('.lightbox-img');
-                const lightboxCaption = document.querySelector('.lightbox-caption');
-                const lightboxClose = document.querySelector('.lightbox-close');
-                const lightboxPrev = document.querySelector('.lightbox-prev');
-                const lightboxNext = document.querySelector('.lightbox-next');
-                
-                const galleryItems = document.querySelectorAll('.gallery-item');
-                let currentIndex = 0;
-                
-                // Performance optimization: Use event delegation instead of multiple listeners
-                document.querySelector('.gallery-grid').addEventListener('click', function(e) {
-                    // Find the gallery item that was clicked
-                    const item = e.target.closest('.gallery-item');
-                    if (!item) return;
-                    
-                    // Get the index of the clicked item
-                    currentIndex = Array.from(galleryItems).indexOf(item);
-                    
-                    // Update and show lightbox
-                    updateLightbox();
-                    lightbox.classList.add('active');
-                    
-                    // Prevent body scrolling with less layout thrashing
-                    document.body.style.overflow = 'hidden';
-                    document.body.style.paddingRight = '15px';
-                    document.body.style.position = 'fixed';
-                    document.body.style.width = '100%';
-                    
-                    // Preload next and previous images for smoother navigation
-                    preloadAdjacentImages(currentIndex);
-                });
-                
-                // Close lightbox - use one function for all close events
-                function closeLightbox() {
-                    lightbox.classList.remove('active');
-                    
-                    // Re-enable body scrolling
-                    document.body.style.overflow = '';
-                    document.body.style.paddingRight = '';
-                    document.body.style.position = '';
-                    document.body.style.width = '';
-                }
-                
-                // Close on button click
-                lightboxClose.addEventListener('click', closeLightbox);
-                
-                // Close on outside click - optimized event handler
-                lightbox.addEventListener('click', function(e) {
-                    if (e.target === lightbox) {
-                        closeLightbox();
-                    }
-                });
-                
-                // Navigate to previous image with debounce to prevent rapid clicking
-                let navTimeout;
-                lightboxPrev.addEventListener('click', function() {
-                    if (navTimeout) return;
-                    navTimeout = setTimeout(() => {
-                        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-                        updateLightbox();
-                        preloadAdjacentImages(currentIndex);
-                        navTimeout = null;
-                    }, 200);
-                });
-                
-                // Navigate to next image with debounce
-                lightboxNext.addEventListener('click', function() {
-                    if (navTimeout) return;
-                    navTimeout = setTimeout(() => {
-                        currentIndex = (currentIndex + 1) % galleryItems.length;
-                        updateLightbox();
-                        preloadAdjacentImages(currentIndex);
-                        navTimeout = null;
-                    }, 200);
-                });
-                
-                // Update lightbox content - optimized
-                function updateLightbox() {
-                    const currentItem = galleryItems[currentIndex];
-                    const imgSrc = currentItem.querySelector('img').src;
-                    const caption = currentItem.querySelector('.image-caption')?.textContent || '';
-                    
-                    // Performance optimization: Only update DOM if content has changed
-                    if (lightboxImg.src !== imgSrc) {
-                        lightboxImg.src = imgSrc;
-                    }
-                    
-                    if (lightboxCaption.textContent !== caption) {
-                        lightboxCaption.textContent = caption;
-                    }
-                }
-                
-                // Preload adjacent images for smoother navigation
-                function preloadAdjacentImages(index) {
-                    const nextIndex = (index + 1) % galleryItems.length;
-                    const prevIndex = (index - 1 + galleryItems.length) % galleryItems.length;
-                    
-                    // Preload next and previous images
-                    const nextImg = galleryItems[nextIndex].querySelector('img').src;
-                    const prevImg = galleryItems[prevIndex].querySelector('img').src;
-                    
-                    // Create Image objects to preload them
-                    new Image().src = nextImg;
-                    new Image().src = prevImg;
-                }
-                
-                // Keyboard navigation - optimized
-                document.addEventListener('keydown', function(e) {
-                    if (!lightbox.classList.contains('active')) return;
-                    
-                    switch (e.key) {
-                        case 'Escape':
-                            closeLightbox();
-                            break;
-                        case 'ArrowLeft':
-                            if (!navTimeout) {
-                                navTimeout = setTimeout(() => {
-                                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-                                    updateLightbox();
-                                    preloadAdjacentImages(currentIndex);
-                                    navTimeout = null;
-                                }, 200);
-                            }
-                            break;
-                        case 'ArrowRight':
-                            if (!navTimeout) {
-                                navTimeout = setTimeout(() => {
-                                    currentIndex = (currentIndex + 1) % galleryItems.length;
-                                    updateLightbox();
-                                    preloadAdjacentImages(currentIndex);
-                                    navTimeout = null;
-                                }, 200);
-                            }
-                            break;
-                    }
-                });
-            }
-        });
-        
-        // Add passive event listeners for better scroll performance
-        document.addEventListener('touchstart', function() {}, {passive: true});
-        document.addEventListener('touchmove', function() {}, {passive: true});
-        
-        // Detect slow connections and adjust quality
-        if (navigator.connection) {
-            const connection = navigator.connection;
-            if (connection.effectiveType === '2g' || connection.saveData) {
-                // Reduce animations for slow connections
-                document.documentElement.classList.add('reduce-motion');
-            }
-        }
-    </script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
