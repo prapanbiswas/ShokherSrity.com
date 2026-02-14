@@ -156,7 +156,7 @@ function initStatsCounter() {
 // ============================================
 function initGalleryFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.masonry-item');
+    const galleryItems = document.querySelectorAll('.gallery-item');
     
     if (filterBtns.length === 0 || galleryItems.length === 0) return;
     
@@ -174,13 +174,13 @@ function initGalleryFilter() {
                 
                 if (filter === 'all' || category === filter) {
                     item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
+                    item.style.visibility = 'visible';
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
                 } else {
                     item.style.opacity = '0';
                     item.style.transform = 'scale(0.9)';
+                    item.style.visibility = 'hidden';
                     setTimeout(() => {
                         item.style.display = 'none';
                     }, 300);
@@ -203,7 +203,7 @@ function initLightbox() {
     const lightboxPrev = lightbox.querySelector('.lightbox-prev');
     const lightboxNext = lightbox.querySelector('.lightbox-next');
     
-    const galleryItems = document.querySelectorAll('.masonry-item, .featured-item');
+    const galleryItems = document.querySelectorAll('.gallery-item, .featured-item');
     let currentIndex = 0;
     let visibleItems = [];
     
