@@ -21,6 +21,19 @@
     <link rel="icon" href="attached_assets/logo.webp" type="image/webp">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-logo">ShokherSrity</div>
+        <div class="preloader-line"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
     <!-- Header -->
     <header>
         <nav>
@@ -179,6 +192,127 @@
                 </div>
             </div>
 
+            <!-- Contact Form Section -->
+            <div class="contact-form-section" data-aos="fade-up">
+                <div class="contact-form-header">
+                    <div style="width: 60px; height: 60px; background: rgba(212,175,55,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Send Us a Message</h3>
+                    <p style="color: #666;">Fill out the form below and we'll get back to you within 24 hours</p>
+                </div>
+
+                <!-- Success Message -->
+                <div id="form-success" class="form-alert form-alert-success" style="display: none;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <div>
+                        <strong>Message Sent Successfully!</strong>
+                        <p>Thank you for reaching out. We'll respond within 24 hours.</p>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="form-error" class="form-alert form-alert-error" style="display: none;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <div>
+                        <strong>Something went wrong</strong>
+                        <p>Please try again or contact us via WhatsApp.</p>
+                    </div>
+                </div>
+
+                <form id="contact-form" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Full Name <span class="required">*</span></label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input type="text" id="contact-name" name="name" placeholder="Your full name" required class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email Address <span class="required">*</span></label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <input type="email" id="contact-email" name="email" placeholder="your@email.com" required class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-phone" class="form-label">Phone Number</label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+                                </svg>
+                                <input type="tel" id="contact-phone" name="phone" placeholder="+880 1XXX-XXXXXX" class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-service" class="form-label">Service Interested In</label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"></path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
+                                <select id="contact-service" name="service" class="form-input form-select">
+                                    <option value="">Select a service</option>
+                                    <option value="wedding-photography">Wedding Photography</option>
+                                    <option value="wedding-cinematography">Wedding Cinematography</option>
+                                    <option value="pre-wedding">Pre-Wedding Shoot</option>
+                                    <option value="portrait">Portrait Session</option>
+                                    <option value="event">Event Coverage</option>
+                                    <option value="full-package">Full Package (Photo + Video)</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-message" class="form-label">Your Message <span class="required">*</span></label>
+                        <div class="form-input-wrapper form-textarea-wrapper">
+                            <svg class="form-input-icon form-textarea-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path>
+                            </svg>
+                            <textarea id="contact-message" name="message" placeholder="Tell us about your wedding date, venue, and what you're looking for..." required rows="5" class="form-input form-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn btn btn-primary" id="submit-btn">
+                        <span class="btn-text">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            Send Message
+                        </span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"></circle>
+                            </svg>
+                            Sending...
+                        </span>
+                    </button>
+                </form>
+            </div>
+
             <!-- Social Proof / Testimonials -->
             <div style="background: var(--color-white); border-radius: 24px; padding: 3rem; margin-top: 3rem;" data-aos="fade-up">
                 <div style="text-align: center; margin-bottom: 2rem;">
@@ -197,6 +331,111 @@
                     <div style="text-align: center; padding: 1.5rem; background: var(--color-cream); border-radius: 16px;">
                         <div style="font-size: 2.5rem; font-weight: 800; color: var(--color-gold); margin-bottom: 0.5rem;">100+</div>
                         <p style="color: #666; font-size: 0.9rem;">Weddings Captured</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section" data-aos="fade-up">
+                <div class="faq-header">
+                    <div class="faq-header-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>Frequently Asked Questions</h3>
+                    <p style="color: #666;">Everything you need to know about our services</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How far in advance should I book?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We recommend booking at least 2-3 months in advance, especially during peak wedding season (November-February). However, feel free to reach out anytime — we'll do our best to accommodate your date.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>When will I receive my photos and videos?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Edited photos are delivered within 2 weeks. Cinematic promo videos take about 3-4 weeks, and full event videos are delivered within 4-6 weeks after the event.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Do you travel outside Dhaka?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely! We cover weddings across Bangladesh — from Chittagong to Sylhet, Cox's Bazar to Rajshahi. Travel costs may apply depending on the location. Contact us for a custom quote.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can I customize a package?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Every wedding is unique, and we love creating tailored packages. Whether you need additional coverage hours, drone footage, or a pre-wedding shoot — we can build a package that fits your vision and budget.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What is the payment process?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We require a 30% advance to confirm your booking. The remaining balance can be paid on the day of the event or before delivery. We accept bKash, Nagad, bank transfer, and cash payments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Map Section -->
+            <div class="location-section" data-aos="fade-up">
+                <div class="location-content">
+                    <div class="location-info">
+                        <span class="section-label" style="justify-content: flex-start;">Location</span>
+                        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Find Us in <span class="text-gradient">Dhaka</span></h3>
+                        <p style="margin-bottom: 1.5rem;">Based in the heart of Dhaka, we serve couples across all of Bangladesh. Our studio is easily accessible and we're always happy to meet for a consultation.</p>
+                        <div class="location-details">
+                            <div class="location-detail-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Dhaka, Bangladesh</span>
+                            </div>
+                            <div class="location-detail-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+                                </svg>
+                                <span>+880 1799-334656</span>
+                            </div>
+                            <div class="location-detail-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <span>shokhersrity@gmail.com</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Dhaka,Bangladesh" target="_blank" class="btn btn-outline" style="margin-top: 1.5rem;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Open in Google Maps
+                        </a>
+                    </div>
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233668.38703692186!2d90.27887606767038!3d23.780573463905765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563571d5d75e!2sDhaka!5e0!3m2!1sen!2sbd!4v1710000000000" width="100%" height="100%" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -273,8 +512,30 @@
         </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/8801799334656?text=Hello! I would like to inquire about your wedding photography services." target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="floating-whatsapp-tooltip">Chat with us!</span>
+    </a>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" aria-label="Back to top">
+        <div class="back-to-top-progress">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" stroke="rgba(212,175,55,0.3)" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="22"/></svg>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </div>
+
+    <!-- Firebase SDK (CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="firebase.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

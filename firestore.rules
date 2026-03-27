@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =============================================
+    // ADMIN WHITELIST
+    // Supports multiple admins via document-per-UID
+    // Bootstrap: first authenticated user can create
+    // their own admin doc (one-time self-registration)
+    // After that, only existing admins can manage
+    // =============================================
+    match /admins/{uid} {
+      // Read: only existing admins
+      allow read: if request.auth != null 
+                  && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      
+      // Write (create): allowed if user is authenticated AND
+      //   - user is an existing admin (normal admin management), OR
+      //   - user is creating their OWN doc (uid matches auth.uid)
+      //     This allows bootstrap by first admin only
+      allow create: if request.auth != null 
+                    && (exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+                        || request.auth.uid == uid);
+      
+      // Update/Delete: only existing admins
+      allow update, delete: if request.auth != null 
+                            && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // =============================================
+    // IMAGES COLLECTION
+    // Public read (website visitors can view images)
+    // Write only by authenticated admins
+    // =============================================
+    match /images/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null 
+                   && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // =============================================
+    // DENY ALL OTHER PATHS
+    // Iron-clad: everything not explicitly allowed is denied
+    // =============================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

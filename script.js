@@ -1,7 +1,28 @@
 /**
  * ShokherSrity - Premium Wedding Photography
- * Main JavaScript File
+ * Main JavaScript File — Enhanced UI/UX
  */
+
+// ============================================
+// PAGE PRELOADER
+// ============================================
+function initPreloader() {
+    const preloader = document.querySelector('.preloader');
+    if (!preloader) return;
+    
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            document.body.classList.add('loaded');
+        }, 800);
+    });
+    
+    // Fallback: hide after 3 seconds max
+    setTimeout(() => {
+        preloader.classList.add('hidden');
+        document.body.classList.add('loaded');
+    }, 3000);
+}
 
 // ============================================
 // DYNAMIC COPYRIGHT YEAR
@@ -16,25 +37,118 @@ function updateCopyrightYear() {
 }
 
 // ============================================
-// HEADER SCROLL EFFECT
+// SCROLL PROGRESS BAR
 // ============================================
-function initHeaderScroll() {
+function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress');
+    if (!progressBar) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    }, { passive: true });
+}
+
+// ============================================
+// SMART HEADER (HIDE/SHOW ON SCROLL)
+// ============================================
+function initSmartHeader() {
     const header = document.querySelector('header');
     if (!header) return;
     
     let lastScroll = 0;
+    let ticking = false;
+    const scrollThreshold = 100;
     
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const currentScroll = window.pageYOffset;
+                
+                // Add scrolled class
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                    header.classList.remove('header-hidden');
+                }
+                
+                // Smart hide/show
+                if (currentScroll > scrollThreshold) {
+                    if (currentScroll > lastScroll && currentScroll > 200) {
+                        // Scrolling down — hide
+                        header.classList.add('header-hidden');
+                    } else {
+                        // Scrolling up — show
+                        header.classList.remove('header-hidden');
+                    }
+                }
+                
+                lastScroll = currentScroll;
+                ticking = false;
+            });
+            ticking = true;
         }
-        
-        lastScroll = currentScroll;
     }, { passive: true });
+}
+
+// ============================================
+// CUSTOM CURSOR
+// ============================================
+function initCustomCursor() {
+    // Skip on touch devices
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+    
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    if (!dot || !ring) return;
+    
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+    });
+    
+    // Smooth ring follow
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+    
+    // Hover effect on interactive elements
+    const hoverTargets = document.querySelectorAll('a, button, .btn, .featured-item, .masonry-item, .testimonial-card, .package-card, .contact-card, .inquiry-card, .filter-btn, .floating-whatsapp, .back-to-top');
+    
+    hoverTargets.forEach(target => {
+        target.addEventListener('mouseenter', () => {
+            dot.classList.add('hovering');
+            ring.classList.add('hovering');
+        });
+        target.addEventListener('mouseleave', () => {
+            dot.classList.remove('hovering');
+            ring.classList.remove('hovering');
+        });
+    });
+    
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+    });
 }
 
 // ============================================
@@ -67,6 +181,23 @@ function initMobileMenu() {
             menuBtn.classList.remove('active');
             navLinks.classList.remove('active');
             document.body.classList.remove('no-scroll');
+        }
+    });
+}
+
+// ============================================
+// ACTIVE NAV STATE
+// ============================================
+function initActiveNav() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || 
+            (currentPage === '' && href === 'index.html') ||
+            (currentPage === '/' && href === 'index.html')) {
+            link.classList.add('active');
         }
     });
 }
@@ -117,7 +248,7 @@ function initStaggerAnimation() {
 }
 
 // ============================================
-// STATS COUNTER ANIMATION
+// STATS COUNTER ANIMATION (ENHANCED)
 // ============================================
 function initStatsCounter() {
     const statNumbers = document.querySelectorAll('.stat-number[data-count]');
@@ -129,20 +260,29 @@ function initStatsCounter() {
             if (entry.isIntersecting) {
                 const target = parseInt(entry.target.dataset.count);
                 const suffix = entry.target.dataset.suffix || '';
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
+                const duration = 2500;
+                const startTime = performance.now();
                 
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        entry.target.textContent = target + suffix;
-                        clearInterval(timer);
+                function easeOutExpo(t) {
+                    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+                }
+                
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = easeOutExpo(progress);
+                    const current = Math.floor(easedProgress * target);
+                    
+                    entry.target.textContent = current + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
                     } else {
-                        entry.target.textContent = Math.floor(current) + suffix;
+                        entry.target.textContent = target + suffix;
                     }
-                }, 16);
+                }
                 
+                requestAnimationFrame(updateCounter);
                 observer.unobserve(entry.target);
             }
         });
@@ -210,7 +350,6 @@ function initLightbox() {
     // Open lightbox
     galleryItems.forEach((item, index) => {
         item.addEventListener('click', () => {
-            // Get currently visible items only
             visibleItems = Array.from(galleryItems).filter(i => i.style.display !== 'none');
             currentIndex = visibleItems.indexOf(item);
             
@@ -255,15 +394,19 @@ function initLightbox() {
         updateLightbox();
     }
     
-    lightboxPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevImage();
-    });
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevImage();
+        });
+    }
     
-    lightboxNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextImage();
-    });
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextImage();
+        });
+    }
     
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -290,7 +433,6 @@ function initParallax() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
-    // Check if device supports hover (not touch)
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     if (isTouch) return;
     
@@ -322,6 +464,68 @@ function initSmoothScroll() {
                     behavior: 'smooth'
                 });
             }
+        });
+    });
+}
+
+// ============================================
+// BACK TO TOP BUTTON
+// ============================================
+function initBackToTop() {
+    const btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+    
+    const progressCircle = btn.querySelector('.back-to-top-progress circle');
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollTop / docHeight;
+        
+        // Show/hide button
+        if (scrollTop > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+        
+        // Update progress circle
+        if (progressCircle) {
+            const circumference = 2 * Math.PI * 22;
+            const offset = circumference - (scrollPercent * circumference);
+            progressCircle.style.strokeDasharray = circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+    }, { passive: true });
+    
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ============================================
+// BUTTON RIPPLE EFFECT
+// ============================================
+function initButtonRipple() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('btn-ripple');
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
         });
     });
 }
@@ -370,7 +574,7 @@ function initAOS() {
 // WHATSAPP BUTTON
 // ============================================
 function initWhatsAppButton() {
-    const whatsappBtns = document.querySelectorAll('.whatsapp-btn, [data-whatsapp]');
+    const whatsappBtns = document.querySelectorAll('.whatsapp-btn, [data-whatsapp], .floating-whatsapp');
     
     whatsappBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -422,6 +626,9 @@ function addNoiseTexture() {
     const sections = document.querySelectorAll('.hero, .testimonials, .cta-section');
     
     sections.forEach(section => {
+        // Skip if already has noise
+        if (section.querySelector('.noise-overlay')) return;
+        
         const noise = document.createElement('div');
         noise.className = 'noise-overlay';
         noise.style.cssText = `
@@ -454,12 +661,10 @@ function respectReducedMotion() {
 // PERFORMANCE OPTIMIZATION
 // ============================================
 function optimizePerformance() {
-    // Disable complex animations on low-power devices
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) {
         document.body.classList.add('reduce-motion');
     }
     
-    // Disable animations on battery save mode
     if ('getBattery' in navigator) {
         navigator.getBattery().then(battery => {
             if (battery.saveMode) {
@@ -473,11 +678,21 @@ function optimizePerformance() {
 // INITIALIZE ALL
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+    // Preloader (must be first)
+    initPreloader();
+    
     // Core functionality
     updateCopyrightYear();
-    initHeaderScroll();
+    initSmartHeader();
     initMobileMenu();
+    initActiveNav();
     initSmoothScroll();
+    
+    // New UI elements
+    initScrollProgress();
+    initCustomCursor();
+    initBackToTop();
+    initButtonRipple();
     
     // Animations
     initScrollReveal();
@@ -501,9 +716,6 @@ document.addEventListener('DOMContentLoaded', () => {
     addNoiseTexture();
     respectReducedMotion();
     optimizePerformance();
-    
-    // Page load animation
-    document.body.classList.add('loaded');
 });
 
 // ============================================
