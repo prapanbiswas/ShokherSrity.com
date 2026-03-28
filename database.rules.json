@@ -1,40 +1,6 @@
 {
   "rules": {
-    "admins": {
-      ".read": "auth != null && (root.child('admins').child(auth.uid).exists() || !root.child('admins').exists())",
-      ".write": "auth != null && (root.child('admins').child(auth.uid).exists() || !root.child('admins').exists())",
-      "$uid": {
-        ".validate": "newData.hasChildren(['email', 'addedAt'])"
-      }
-    },
-    "site_content": {
-      ".read": true,
-      ".write": "auth != null && root.child('admins').child(auth.uid).exists()"
-    },
-    "contact_submissions": {
-      ".read": "auth != null && root.child('admins').child(auth.uid).exists()",
-      ".write": true,
-      "$submission": {
-        ".validate": "newData.hasChildren(['name', 'email', 'message', 'timestamp'])"
-      }
-    },
-    "inquiries": {
-      ".read": "auth != null && root.child('admins').child(auth.uid).exists()",
-      ".write": true,
-      "$inquiry": {
-        ".validate": "newData.hasChildren(['type', 'timestamp'])"
-      }
-    },
-    "page_visits": {
-      ".read": "auth != null && root.child('admins').child(auth.uid).exists()",
-      ".write": true,
-      "$visit": {
-        ".validate": "newData.hasChildren(['page', 'timestamp'])"
-      }
-    },
-    "$other": {
-      ".read": false,
-      ".write": false
-    }
+    ".read": false,
+    ".write": false
   }
 }

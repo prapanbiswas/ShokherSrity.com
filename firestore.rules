@@ -4,44 +4,109 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // =============================================
+    // HELPER FUNCTIONS
+    // =============================================
+    function isSuperAdmin() {
+      return request.auth != null 
+             && request.auth.uid == 'SpiTXKQbttaRX6qhPhkiXxQGhn32';
+    }
+
+    function isAdmin() {
+      return request.auth != null 
+             && (request.auth.uid == 'SpiTXKQbttaRX6qhPhkiXxQGhn32'
+                 || exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    // =============================================
     // ADMIN WHITELIST
-    // Supports multiple admins via document-per-UID
-    // Bootstrap: first authenticated user can create
-    // their own admin doc (one-time self-registration)
-    // After that, only existing admins can manage
     // =============================================
     match /admins/{uid} {
-      // Read: only existing admins
-      allow read: if request.auth != null 
-                  && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
-      
-      // Write (create): allowed if user is authenticated AND
-      //   - user is an existing admin (normal admin management), OR
-      //   - user is creating their OWN doc (uid matches auth.uid)
-      //     This allows bootstrap by first admin only
-      allow create: if request.auth != null 
-                    && (exists(/databases/$(database)/documents/admins/$(request.auth.uid))
-                        || request.auth.uid == uid);
-      
-      // Update/Delete: only existing admins
-      allow update, delete: if request.auth != null 
-                            && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow read: if isAdmin();
+      allow create: if isSuperAdmin()
+                    || (request.auth != null 
+                        && (exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+                            || request.auth.uid == uid));
+      allow update, delete: if isAdmin();
+    }
+
+    // =============================================
+    // SITE CONTENT (single document)
+    // Public read, admin-only write
+    // =============================================
+    match /site_content/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // =============================================
+    // CONTACT SUBMISSIONS
+    // Admin read, public write (for contact form)
+    // =============================================
+    match /contact_submissions/{subId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // =============================================
+    // INQUIRIES
+    // Admin read, public write (for tracking)
+    // =============================================
+    match /inquiries/{inqId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // =============================================
+    // PAGE VISITS
+    // Admin read, public write (for analytics)
+    // =============================================
+    match /page_visits/{visitId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
     }
 
     // =============================================
     // IMAGES COLLECTION
-    // Public read (website visitors can view images)
-    // Write only by authenticated admins
+    // Public read, admin-only write
     // =============================================
     match /images/{imageId} {
       allow read: if true;
-      allow write: if request.auth != null 
-                   && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
+    }
+
+    // =============================================
+    // FILES COLLECTION
+    // Public read, admin-only write
+    // =============================================
+    match /files/{fileId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // =============================================
+    // FCM TOKENS
+    // Admin read, public write (to register tokens)
+    // =============================================
+    match /fcm_tokens/{tokenId} {
+      allow read: if isAdmin();
+      allow create, update: if true;
+      allow delete: if isAdmin();
+    }
+
+    // =============================================
+    // NOTIFICATIONS
+    // Public read (last notifications), admin write
+    // =============================================
+    match /notifications/{notifId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     // =============================================
     // DENY ALL OTHER PATHS
-    // Iron-clad: everything not explicitly allowed is denied
     // =============================================
     match /{document=**} {
       allow read, write: if false;

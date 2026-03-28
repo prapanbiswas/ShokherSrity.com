@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Seed Database | ShokherSrity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 700px; width: 90%; padding: 2.5rem; background: #12121a; border-radius: 16px; border: 1px solid rgba(212,175,55,0.2); }
+        h1 { font-size: 1.5rem; color: #D4AF37; margin-bottom: 0.5rem; }
+        .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+        .status { margin-top: 1rem; padding: 1rem; background: #1a1a2e; border-radius: 8px; font-size: 0.8rem; line-height: 1.8; max-height: 400px; overflow-y: auto; white-space: pre-wrap; }
+        .btn { padding: 0.8rem 2rem; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #D4AF37; color: #0a0a0f; }
+        .btn-primary:hover { background: #e5c44d; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-danger { background: #ef4444; color: white; margin-left: 1rem; }
+        .btn-danger:hover { background: #dc2626; }
+        .actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .login-section { margin-bottom: 1.5rem; padding: 1.5rem; background: #1a1a2e; border-radius: 8px; }
+        .login-section label { display: block; font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; }
+        .login-section input { width: 100%; padding: 0.6rem 1rem; background: #0a0a0f; border: 1px solid #333; border-radius: 6px; color: #e0e0e0; font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+        .warning { color: #f59e0b; }
+        .info { color: #3b82f6; }
+        .user-info { padding: 0.75rem 1rem; background: rgba(212,175,55,0.1); border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.8rem; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 ShokherSrity Database Seeder</h1>
+        <p class="subtitle">One-time utility to seed all website content into Firebase Realtime Database. You must be logged in as an admin.</p>
+
+        <div class="login-section" id="login-section">
+            <label>Email</label>
+            <input type="email" id="seed-email" placeholder="admin@shokhersrity.com">
+            <label>Password</label>
+            <input type="password" id="seed-password" placeholder="••••••••">
+            <button class="btn btn-primary" id="login-btn" onclick="handleLogin()">Sign In</button>
+        </div>
+
+        <div class="user-info" id="user-info">
+            ✅ Signed in as: <strong id="user-email-display"></strong>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" id="seed-btn" onclick="seedAllContent()" disabled>🌱 Seed All Content</button>
+            <button class="btn btn-primary" id="seed-gallery-btn" onclick="seedGalleryItems()" disabled>🖼️ Seed Gallery Metadata</button>
+        </div>
+
+        <div class="status" id="status">Ready. Please sign in first...</div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase init
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuFEa8Z-FACVQOu8pKN4b37W_cVZ-hZx0",
+            authDomain: "shokher-srity.firebaseapp.com",
+            databaseURL: "https://shokher-srity-default-rtdb.firebaseio.com",
+            projectId: "shokher-srity",
+            storageBucket: "shokher-srity.firebasestorage.app",
+            messagingSenderId: "207020465987",
+            appId: "1:207020465987:web:daa3d48d9897182ce7d9f6",
+            measurementId: "G-BY2J01BWY5"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const auth = firebase.auth();
+
+        const statusEl = document.getElementById('status');
+
+        function log(msg, type = '') {
+            const cls = type ? ` class="${type}"` : '';
+            statusEl.innerHTML += `<span${cls}>${msg}</span>\n`;
+            statusEl.scrollTop = statusEl.scrollHeight;
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('seed-email').value;
+            const password = document.getElementById('seed-password').value;
+            if (!email || !password) { log('❌ Enter email and password', 'error'); return; }
+
+            document.getElementById('login-btn').disabled = true;
+            statusEl.innerHTML = '';
+            log('🔐 Signing in...', 'info');
+
+            try {
+                const cred = await auth.signInWithEmailAndPassword(email, password);
+                log('✅ Signed in as ' + cred.user.email, 'success');
+
+                // Check admin status
+                const snap = await db.ref('admins/' + cred.user.uid).once('value');
+                if (snap.exists()) {
+                    log('✅ Admin verified', 'success');
+                    document.getElementById('seed-btn').disabled = false;
+                    document.getElementById('seed-gallery-btn').disabled = false;
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'block';
+                    document.getElementById('user-email-display').textContent = cred.user.email;
+                } else {
+                    log('⚠️ You are not an admin. Seed requires admin access.', 'warning');
+                }
+            } catch (err) {
+                log('❌ Login failed: ' + err.message, 'error');
+            }
+            document.getElementById('login-btn').disabled = false;
+        }
+
+        // ============================================
+        // SEED DATA
+        // ============================================
+        const siteContent = {
+            hero: {
+                title: "ShokherSrity",
+                tagline: "Capture your best moment"
+            },
+            about: {
+                title: "Where Every Moment Becomes Art",
+                paragraph1: "At ShokherSrity, we believe that wedding photography is more than just capturing images - it's about preserving emotions, telling stories, and creating heirlooms that will be treasured for generations.",
+                paragraph2: "Led by the talented duo Kowsik Saha and Dip Pal, our team brings together technical excellence and artistic vision. With over 5 years of experience and 100+ weddings captured, we understand the nuances of Bangladeshi wedding traditions while adding a contemporary, cinematic touch.",
+                signature: "Capturing the essence of love, one frame at a time.",
+                stats: {
+                    years: "5+",
+                    weddings: "100+",
+                    moments: "5000+"
+                }
+            },
+            contact: {
+                phones: ["+880 1799-334656", "+880 1700-504456"],
+                phoneNames: ["Kowsik", "Dip"],
+                email: "shokhersrity@gmail.com",
+                address: "Dhaka, Bangladesh",
+                addressSubtext: "Available for travel nationwide",
+                whatsapp: "8801799334656"
+            },
+            packages: {
+                silver: {
+                    name: "Silver",
+                    price: "৳15,000",
+                    priceNote: "Perfect for intimate ceremonies",
+                    features: [
+                        "1 Professional Photographer",
+                        "1 Cinematographer",
+                        "Unlimited Photo Clicks",
+                        "100 Specially Edited Photos",
+                        "50 Photo Prints (4R)",
+                        "1 Cinematic Promo Video",
+                        "1 Full Event Video",
+                        "5 Hours Coverage",
+                        "All Photos & Videos on Pen-drive"
+                    ]
+                },
+                golden: {
+                    name: "Golden",
+                    price: "৳20,000",
+                    priceNote: "Our best-selling package",
+                    badge: "Most Popular",
+                    featured: true,
+                    features: [
+                        "2 Professional Photographers",
+                        "1 Cinematographer",
+                        "Unlimited Photo Clicks",
+                        "150 Specially Edited Photos",
+                        "75 Photo Prints (4R)",
+                        "1 Cinematic Promo Video",
+                        "1 Full Event Video",
+                        "5 Hours Coverage",
+                        "All Photos & Videos on Pen-drive"
+                    ]
+                },
+                platinum: {
+                    name: "Platinum",
+                    price: "৳25,000",
+                    priceNote: "The ultimate experience",
+                    features: [
+                        "2 Professional Photographers",
+                        "2 Cinematographers",
+                        "Unlimited Photo Clicks",
+                        "200 Specially Edited Photos",
+                        "100 Photo Prints + Premium Album",
+                        "1 Cinematic Promo Video",
+                        "1 Full Event Video",
+                        "6 Hours Coverage",
+                        "All Photos & Videos on Pen-drive"
+                    ]
+                }
+            },
+            testimonials: [
+                {
+                    name: "Sarah & Rahul",
+                    initials: "SR",
+                    location: "Dhaka, 2023",
+                    text: "ShokherSrity captured our wedding day so beautifully that every time we look at the photos, we relive those magical moments. The attention to detail and the artistic vision exceeded all our expectations.",
+                    stars: 5
+                },
+                {
+                    name: "Nadia & Asif",
+                    initials: "NA",
+                    location: "Chittagong, 2023",
+                    text: "From the pre-wedding shoot to the main event, Kowsik and Dip were incredibly professional and creative. They made us feel comfortable and captured our personalities perfectly.",
+                    stars: 5
+                },
+                {
+                    name: "Farah & Adil",
+                    initials: "FA",
+                    location: "Sylhet, 2024",
+                    text: "The video and photo quality was outstanding! They captured candid moments we didn't even know happened. ShokherSrity truly are artists behind the camera. Highly recommended!",
+                    stars: 5
+                }
+            ],
+            cta: {
+                title: "Ready to Capture Your Special Day?",
+                description: "Let's create something beautiful together. Book a consultation to discuss your vision and let us bring it to life.",
+                buttonText: "Book a Consultation"
+            },
+            featured_work: [
+                { image: "attached_assets/2.webp", category: "ceremony", title: "Sacred Vows", alt: "Wedding Ceremony" },
+                { image: "attached_assets/3.webp", category: "portraits", title: "Eternal Love", alt: "Wedding Portraits" },
+                { image: "attached_assets/4.webp", category: "reception", title: "Joyful Celebration", alt: "Wedding Reception" },
+                { image: "attached_assets/5.webp", category: "details", title: "Precious Moments", alt: "Wedding Details" }
+            ],
+            business_hours: [
+                { day: "Monday - Friday", time: "9:00 AM - 8:00 PM" },
+                { day: "Saturday", time: "10:00 AM - 6:00 PM" },
+                { day: "Sunday", time: "By Appointment" },
+                { day: "Wedding Days", time: "24/7 Coverage" }
+            ],
+            faq: [
+                {
+                    question: "How far in advance should I book?",
+                    answer: "We recommend booking at least 2-3 months in advance, especially during peak wedding season (November-February). However, feel free to reach out anytime — we'll do our best to accommodate your date."
+                },
+                {
+                    question: "When will I receive my photos and videos?",
+                    answer: "Edited photos are delivered within 2 weeks. Cinematic promo videos take about 3-4 weeks, and full event videos are delivered within 4-6 weeks after the event."
+                },
+                {
+                    question: "Do you travel outside Dhaka?",
+                    answer: "Absolutely! We cover weddings across Bangladesh — from Chittagong to Sylhet, Cox's Bazar to Rajshahi. Travel costs may apply depending on the location. Contact us for a custom quote."
+                },
+                {
+                    question: "Can I customize a package?",
+                    answer: "Yes! Every wedding is unique, and we love creating tailored packages. Whether you need additional coverage hours, drone footage, or a pre-wedding shoot — we can build a package that fits your vision and budget."
+                },
+                {
+                    question: "What is the payment process?",
+                    answer: "We require a 30% advance to confirm your booking. The remaining balance can be paid on the day of the event or before delivery. We accept bKash, Nagad, bank transfer, and cash payments."
+                }
+            ],
+            footer: {
+                brand_description: "Premium wedding photography services in Bangladesh. Capturing your love story with elegance, artistry, and passion.",
+                services: ["Wedding Photography", "Cinematography", "Portrait Sessions", "Event Coverage"],
+                social: {
+                    facebook: "https://www.facebook.com/shokhersrity",
+                    instagram: "https://www.instagram.com/shokhersrity",
+                    whatsapp: "https://wa.me/8801799334656"
+                }
+            },
+            lastUpdated: new Date().toISOString(),
+            updatedBy: "database-seeder"
+        };
+
+        const galleryItems = [
+            { file: "1.webp", category: "ceremony", title: "Sacred Beginnings", alt: "Wedding Ceremony Moment" },
+            { file: "2.webp", category: "portraits", title: "Radiant Beauty", alt: "Bride Portrait" },
+            { file: "3.webp", category: "reception", title: "Evening Celebration", alt: "Wedding Reception" },
+            { file: "4.webp", category: "details", title: "Finishing Touches", alt: "Wedding Details" },
+            { file: "5.webp", category: "ceremony", title: "Blessed Union", alt: "Wedding Ritual" },
+            { file: "6.webp", category: "portraits", title: "Together Forever", alt: "Couple Portrait" },
+            { file: "7.webp", category: "reception", title: "First Dance", alt: "Wedding Dance" },
+            { file: "8.webp", category: "details", title: "Symbol of Love", alt: "Wedding Rings" },
+            { file: "9.webp", category: "ceremony", title: "Sacred Traditions", alt: "Traditional Ceremony" },
+            { file: "10.webp", category: "portraits", title: "Dashing Groom", alt: "Groom Portrait" },
+            { file: "11.webp", category: "reception", title: "Joyful Gathering", alt: "Wedding Party" },
+            { file: "12.webp", category: "details", title: "Elegant Decor", alt: "Wedding Decor" },
+            { file: "13.webp", category: "ceremony", title: "Promises Made", alt: "Wedding Vows" },
+            { file: "14.webp", category: "portraits", title: "Intimate Moment", alt: "Couple Embrace" },
+            { file: "15.webp", category: "reception", title: "Sweet Moments", alt: "Wedding Cake" },
+            { file: "16.webp", category: "details", title: "Blooming Love", alt: "Bridal Bouquet" },
+            { file: "17.webp", category: "ceremony", title: "Family Blessings", alt: "Wedding Blessing" },
+            { file: "18.webp", category: "portraits", title: "Golden Hour Love", alt: "Romantic Portrait" },
+            { file: "19.webp", category: "reception", title: "Grand Finale", alt: "Celebration" }
+        ];
+
+        async function seedAllContent() {
+            const btn = document.getElementById('seed-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Seeding...';
+            statusEl.innerHTML = '';
+
+            log('🌱 Starting database seed...', 'info');
+            log('');
+
+            try {
+                // Check if content already exists
+                const existing = await db.ref('site_content').once('value');
+                if (existing.exists()) {
+                    log('⚠️ site_content/ already has data. Overwriting...', 'warning');
+                }
+
+                // Write all content
+                log('📝 Writing site_content/ ...', 'info');
+                await db.ref('site_content').set(siteContent);
+                log('✅ site_content/ written successfully!', 'success');
+
+                // Log summary
+                log('');
+                log('📊 Seeded Content Summary:', 'info');
+                log('   • Hero: title + tagline');
+                log('   • About: title + 2 paragraphs + signature + 3 stats');
+                log('   • Contact: 2 phones + email + address + WhatsApp');
+                log('   • Packages: Silver (9 features) + Golden (9 features) + Platinum (9 features)');
+                log('   • Testimonials: 3 testimonials');
+                log('   • CTA: title + description');
+                log('   • Featured Work: 4 items');
+                log('   • Business Hours: 4 entries');
+                log('   • FAQ: 5 questions');
+                log('   • Footer: brand + services + social links');
+                log('');
+                log('🎉 Database seed completed!', 'success');
+                log('');
+                log('💡 You can now manage all content from the Admin Panel → Content tab.', 'info');
+
+            } catch (error) {
+                log('❌ Seed failed: ' + error.message, 'error');
+                console.error(error);
+            }
+
+            btn.disabled = false;
+            btn.textContent = '🌱 Seed All Content';
+        }
+
+        async function seedGalleryItems() {
+            const btn = document.getElementById('seed-gallery-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Seeding Gallery...';
+
+            log('');
+            log('🖼️ Seeding gallery metadata...', 'info');
+
+            try {
+                const galleryData = {};
+                galleryItems.forEach((item, index) => {
+                    galleryData[`item_${index + 1}`] = {
+                        file: item.file,
+                        path: `attached_assets/${item.file}`,
+                        category: item.category,
+                        title: item.title,
+                        alt: item.alt,
+                        order: index + 1,
+                        type: 'static'
+                    };
+                });
+
+                await db.ref('site_content/gallery_items').set(galleryData);
+                log(`✅ ${galleryItems.length} gallery items seeded!`, 'success');
+
+                log('');
+                log('📊 Gallery Summary:', 'info');
+                log(`   • Ceremony: ${galleryItems.filter(i => i.category === 'ceremony').length} images`);
+                log(`   • Portraits: ${galleryItems.filter(i => i.category === 'portraits').length} images`);
+                log(`   • Reception: ${galleryItems.filter(i => i.category === 'reception').length} images`);
+                log(`   • Details: ${galleryItems.filter(i => i.category === 'details').length} images`);
+                log('');
+                log('🎉 Gallery metadata seed completed!', 'success');
+
+            } catch (error) {
+                log('❌ Gallery seed failed: ' + error.message, 'error');
+            }
+
+            btn.disabled = false;
+            btn.textContent = '🖼️ Seed Gallery Metadata';
+        }
+    </script>
+</body>
+</html>

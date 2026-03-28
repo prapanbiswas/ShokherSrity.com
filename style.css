@@ -1284,6 +1284,16 @@ section {
     border-bottom-color: rgba(255,255,255,0.05);
 }
 
+.package-features li.highlight {
+    color: var(--color-gold);
+    font-weight: 500;
+}
+
+.package-card.featured .package-features li.highlight {
+    color: var(--color-gold);
+    font-weight: 600;
+}
+
 .package-features li svg {
     width: 18px;
     height: 18px;

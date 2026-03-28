@@ -728,3 +728,134 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+// ============================================
+// DYNAMIC PACKAGES RENDERING
+// ============================================
+window.renderDynamicPackages = async function() {
+    const container = document.getElementById('dynamic-packages-container');
+    if (!container) return;
+    
+    try {
+        if (typeof loadPackagesByCategory !== 'function') return;
+        
+        const groupedPkgs = await loadPackagesByCategory();
+        
+        // Flatten into a single array, but preserve category order: essential, premium, luxury
+        const sortedCats = ['essential', 'premium', 'luxury'];
+        let allPkgs = [];
+        sortedCats.forEach(cat => {
+            if (groupedPkgs[cat]) allPkgs = allPkgs.concat(groupedPkgs[cat]);
+        });
+        
+        if (allPkgs.length === 0) {
+            container.innerHTML = '<div style="text-align: center; width: 100%;"><p>No packages available at the moment. Please check back later.</p></div>';
+            return;
+        }
+
+        const SVGIcons = {
+            camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>',
+            video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>',
+            drone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 6L18 10L14 6L18 2L22 6Z" /><path d="M10 6L6 10L2 6L6 2L10 6Z" /><path d="M22 18L18 22L14 18L18 14L22 18Z" /><path d="M10 18L6 22L2 18L6 14L10 18Z" /><circle cx="12" cy="12" r="3" /><path d="M18 10V14M6 10V14M10 6H14M10 18H14M17.16 8.84L14.41 11.59M9.59 12.41L6.84 15.16M15.16 6.84L12.41 9.59M8.84 17.16L11.59 14.41" /></svg>',
+            album: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="2" x2="12" y2="22"></line><line x1="8" y1="2" x2="8" y2="22"></line></svg>',
+            ring: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="14" r="7"></circle><path d="M12 7L14 3L10 3L12 7Z"></path></svg>',
+            heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
+            star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>',
+            sparkles: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"></path></svg>',
+            clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+            users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+            award: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
+            image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>',
+            crown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4L6 14H18L22 4L16 9L12 3L8 9L2 4Z"></path><path d="M4 16H20V20H4V16Z"></path></svg>',
+            calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',
+            sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+            film: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>',
+            umbrella: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12A10.06 10.06 0 0 0 12 2 10.06 10.06 0 0 0 2 12"></path><path d="M12 12v8a2 2 0 0 0 4 0"></path><path d="M12 2v10"></path></svg>',
+            aperture: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>',
+            diamond: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="M11 3L8 9l4 13"></path><path d="M13 3l3 6-4 13"></path><path d="M2 9h20"></path></svg>',
+            magic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21l18-18"></path><path d="M8 5l2 2"></path><path d="M17 14l2 2"></path><path d="M14 17l2 2"></path><path d="M5 8l2 2"></path></svg>'
+        };
+
+        const escapeStr = (str) => {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        };
+
+        // Render packages
+        container.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-top: 2rem; max-width: 1200px; margin-inline: auto; width: 100%;';
+        
+        container.innerHTML = allPkgs.map((pkg, index) => {
+            const isFeatured = pkg.isFeatured;
+            const featuredClass = isFeatured ? 'featured' : '';
+            const featuredBadge = isFeatured ? '<div class="package-badge">Most Popular</div>' : '';
+            const iconSvg = SVGIcons[pkg.icon] || SVGIcons.camera;
+            
+            // Format features
+            const featuresHtml = (pkg.features || []).map(f => {
+                const text = typeof f === 'string' ? f : f.text;
+                const isHighlighted = typeof f === 'object' && f.highlighted;
+                
+                // Add highlight styling using SVG changes or strong tags if desired
+                return `
+                    <li ${isHighlighted ? 'class="highlight"' : ''}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${isHighlighted 
+                                ? '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'
+                                : '<polyline points="20 6 9 17 4 12"></polyline>'
+                            }
+                        </svg>
+                        ${escapeStr(text)}
+                    </li>
+                `;
+            }).join('');
+
+            return `
+                <div class="package-card ${featuredClass}" data-aos="fade-up" data-aos-delay="${index * 100}">
+                    ${featuredBadge}
+                    <div class="package-icon">
+                        ${iconSvg}
+                    </div>
+                    <h3 class="package-name">${escapeStr(pkg.title)}</h3>
+                    <div class="package-price">
+                        ${escapeStr(pkg.price)}
+                        ${pkg.priceNote ? `<span>${escapeStr(pkg.priceNote)}</span>` : ''}
+                    </div>
+                    <div class="package-divider"></div>
+                    <ul class="package-features">
+                        ${featuresHtml}
+                    </ul>
+                    <a href="contact.html?package=${encodeURIComponent(pkg.title)}" class="package-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Book Now
+                    </a>
+                </div>
+            `;
+        }).join('');
+
+        // Re-initialize hover effects for new cards
+        initCustomCursor();
+
+    } catch (error) {
+        console.error('Error rendering packages:', error);
+        container.innerHTML = '<div style="text-align: center; width: 100%; color: var(--color-gold);"><p>Error loading packages. Please refresh the page.</p></div>';
+    }
+};
+
+// Also listen for auth state or ready document to render them if we are on packages.html
+document.addEventListener('DOMContentLoaded', () => {
+    // Other init functions are already here...
+    
+    // If the function was loaded after firebase.js tried to call it
+    if (window.location.pathname.includes('packages')) {
+        const container = document.getElementById('dynamic-packages-container');
+        if (container && container.querySelector('.spinner')) {
+            window.renderDynamicPackages();
+        }
+    }
+});
