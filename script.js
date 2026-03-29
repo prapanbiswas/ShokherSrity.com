@@ -327,28 +327,23 @@ function initSmoothScroll() {
 }
 
 // ============================================
-// IMAGE LAZY LOADING
+// IMAGE LOADING OPTIMIZATION
 // ============================================
-function initLazyLoading() {
-    const lazyImages = document.querySelectorAll('img[data-src]');
+function initImageLoading() {
+    const images = document.querySelectorAll('img');
     
-    if (lazyImages.length === 0) return;
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
+    images.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
                 img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    }, {
-        rootMargin: '100px 0px'
+            });
+            img.addEventListener('error', () => {
+                img.classList.add('error');
+            });
+        }
     });
-    
-    lazyImages.forEach(img => imageObserver.observe(img));
 }
 
 // ============================================
@@ -488,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gallery
     initGalleryFilter();
     initLightbox();
-    initLazyLoading();
+    initImageLoading();
     
     // Third-party
     initAOS();

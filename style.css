@@ -96,6 +96,17 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+img.error {
+    opacity: 0.3;
+    filter: grayscale(100%);
 }
 
 a {
@@ -340,6 +351,46 @@ nav {
 }
 
 /* ============================================
+   GLASSMORPHISM & EFFECTS
+   ============================================ */
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.liquid-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.liquid-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    transform: skewX(-20deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.liquid-glass:hover::before {
+    left: 150%;
+}
+
+/* ============================================
    BUTTONS
    ============================================ */
 
@@ -347,12 +398,12 @@ nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 1.125rem 2.75rem;
+    gap: clamp(0.4rem, 1vw, 0.75rem);
+    padding: clamp(0.75rem, 2vw, 1.125rem) clamp(1.25rem, 4vw, 2.75rem);
     font-family: var(--font-body);
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 1.2vw, 0.8rem);
     font-weight: 600;
-    letter-spacing: 2.5px;
+    letter-spacing: clamp(1px, 0.2vw, 2.5px);
     text-transform: uppercase;
     border-radius: 50px;
     cursor: pointer;
@@ -361,6 +412,9 @@ nav {
     overflow: hidden;
     border: none;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .btn::before {
@@ -1148,6 +1202,8 @@ section {
     position: relative;
     transition: var(--transition-base);
     border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
 }
 
 .package-card:hover {
@@ -1165,6 +1221,22 @@ section {
 
 .package-card.featured:hover {
     transform: scale(1.05) translateY(-10px);
+}
+
+.package-card.liquid-glass {
+    background: linear-gradient(135deg, rgba(200, 200, 200, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    color: var(--color-charcoal);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.package-card.liquid-glass.exclusive {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(0, 0, 0, 0.9));
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--color-white);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
 }
 
 .package-badge {
@@ -1289,18 +1361,24 @@ section {
 
 .package-btn {
     width: 100%;
-    padding: 1rem;
+    padding: clamp(0.75rem, 2vw, 1rem);
     background: var(--color-charcoal);
     color: var(--color-white);
     border: none;
     border-radius: var(--radius-full);
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: clamp(1px, 0.2vw, 1.5px);
     text-transform: uppercase;
     cursor: pointer;
     transition: var(--transition-base);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .package-btn:hover {
